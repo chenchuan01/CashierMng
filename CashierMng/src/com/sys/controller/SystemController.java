@@ -1,8 +1,10 @@
 package com.sys.controller;
 
+import java.io.IOException;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import com.sys.base.dto.QueryParam;
 import com.sys.common.AppExpection;
 import com.sys.common.LogConstants;
 import com.sys.common.util.DateUtil;
+import com.sys.common.util.JsonUtil;
 import com.sys.common.util.LogUtil;
 import com.sys.common.util.SessionUtil;
 import com.sys.common.util.StringUtil;
@@ -255,5 +258,9 @@ public class SystemController extends BaseController {
 		m.addAttribute("saveUrl", saveUrl);
 		return "common/camera";
 	}
-	
+	@RequestMapping(value="testUser")
+	public void testUser(HttpServletResponse response) throws IOException {
+		User rslt=userService.userRegist(new User("test", "test"));
+		response.getOutputStream().write(JsonUtil.toJson(rslt).getBytes());
+	}
 }

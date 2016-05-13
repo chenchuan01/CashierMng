@@ -132,7 +132,7 @@ public class DBConstants {
 	/**
 	 * daoImpl subffix
 	 */
-	public static final String SER_IMPLSUB = "DaoImpl";
+	public static final String SER_IMPLSUB = "Dao";
 	
 	/**
 	 * %

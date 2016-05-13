@@ -1,11 +1,6 @@
 package com.sys.db.entity;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import com.sys.base.BaseEntity;
@@ -13,48 +8,51 @@ import com.sys.base.BaseEntity;
 /**
  * œµÕ≥≈‰÷√
  */
+@SuppressWarnings("serial")
 @Entity  
-@Table(name = "t_config")  
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)  
-@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)  
-@DiscriminatorValue(value = "config")  
+@Table(name = "tb_config")  
 public class Config extends BaseEntity{
-	private String key;
-	private String value;
+	private String config_key;
+	private String config_value;
 	private String remarks;
 	public Config() {
 	}
 	
 	public Config(String key) {
 		super();
-		this.key = key;
+		this.config_key = key;
 	}
 	
 	public Config(String key, String value) {
 		super();
-		this.key = key;
-		this.value = value;
+		this.config_key = key;
+		this.config_value = value;
 	}
 	
 	public Config(String key, String value, String remarks) {
 		super();
-		this.key = key;
-		this.value = value;
+		this.config_key = key;
+		this.config_value = value;
 		this.remarks = remarks;
 	}
 
-	public String getKey() {
-		return key;
+	
+	public String getConfig_key() {
+		return config_key;
 	}
-	public void setKey(String key) {
-		this.key = key;
+
+	public void setConfig_key(String config_key) {
+		this.config_key = config_key;
 	}
-	public String getValue() {
-		return value;
+
+	public String getConfig_value() {
+		return config_value;
 	}
-	public void setValue(String value) {
-		this.value = value;
+
+	public void setConfig_value(String config_value) {
+		this.config_value = config_value;
 	}
+
 	public String getRemarks() {
 		return remarks;
 	}

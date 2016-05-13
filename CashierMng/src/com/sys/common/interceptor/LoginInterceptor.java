@@ -10,8 +10,11 @@ import com.sys.SysConstants;
 import com.sys.common.util.LogUtil;
 import com.sys.db.entity.User;
 
+/**
+ * LoginInterceptor.java
+ */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
-	private static final String[] IGNORE_URI = { "login", "regist","verify","code","show","img"};
+	private static final String[] IGNORE_URI = { "login","static","img","test"};
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,

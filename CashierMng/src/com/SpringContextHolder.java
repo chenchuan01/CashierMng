@@ -3,6 +3,9 @@ package com;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
+import com.sys.common.util.LogUtil;
 /**
  * 
  * 以静态变量保存ApplicationContext
@@ -15,6 +18,7 @@ public class SpringContextHolder implements ApplicationContextAware{
 	 */
 	public void setApplicationContext(ApplicationContext applicationContext)
 			throws BeansException {
+		LogUtil.info(getClass(), "注入Spring applicationContext....");
 		SpringContextHolder.applicationContext = applicationContext;
 	}
 	/**
@@ -22,7 +26,6 @@ public class SpringContextHolder implements ApplicationContextAware{
 	 * @return
 	 */
 	public static ApplicationContext getApplicationContext(){
-		checkApplicationContext();
 		return applicationContext;
 	}
 	/**
@@ -56,7 +59,7 @@ public class SpringContextHolder implements ApplicationContextAware{
 	
 	public static void checkApplicationContext(){
 		if(applicationContext==null){
-			throw new IllegalStateException("applicationContext未注入，请在applicationContext.xml中定义SpringContextHolder.");
+		    applicationContext=new FileSystemXmlApplicationContext("classpath*:/applicationContext.xml");
 		}
 	}
 }

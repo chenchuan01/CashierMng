@@ -16,6 +16,6 @@ public interface ConfigDao extends BaseDao<Config>{
 	 * @param configKey
 	 * @return
 	 */
-	@Query("form Config where key=1?")
+	@Query("from Config where config_key=?1")
 	Config findKey(String configKey);
 }

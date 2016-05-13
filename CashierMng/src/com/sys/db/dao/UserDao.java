@@ -20,6 +20,6 @@ public interface UserDao extends BaseDao<User>{
 	 * @param user
 	 * @return
 	 */
-	@Query("form User where userName=1? and password=2? and "+DBConstants.DEL_FLAG+"!=1")
+	@Query("from User where userName=?1 and password=?2 and "+DBConstants.DEL_FLAG+"!=1")
 	User verify(String userName,String password);
 }

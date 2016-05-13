@@ -17,21 +17,17 @@ public class AuthUtil {
 	 */
 	public static final int AU_SUPER=0;
 	/**
-	 * 一般股东
-	 */
-	public static final int AU_HOLDER=1;
-	/**
 	 * 管理员
 	 */
-	public static final int AU_ADMIN=2;
+	public static final int AU_ADMIN=1;
 	/**
 	 * 普通用户
 	 */
-	public static final int AU_USER=3;
+	public static final int AU_USER=2;
 	
 	/***************操作类型********************/
 	/**
-	 * 前台操作
+	 * 操作
 	 */
 	public static final String OP_OPERA="opera";
 	/**

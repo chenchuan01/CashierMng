@@ -29,9 +29,6 @@ public class ConfigUtil {
 	 */
 	public static final String V_SPLIT=",";
 	
-	static ConfigService configService =SpringContextHolder.getBean("configService");
-	
-	
 	
 	/**
 	 * 获得config对象
@@ -40,7 +37,7 @@ public class ConfigUtil {
 	 */
 	public static Config getConfig(String key){
 		Config query = new Config(key);
-		return configService.findEntity(query);
+		return configService().findEntity(query);
 	}
 	
 	/**
@@ -50,8 +47,8 @@ public class ConfigUtil {
 	 */
 	public static String getStrVal(String key){
 		Config config = getConfig(key);
-		if(config!=null&&StringUtil.isNotNull(config.getValue())){
-			return config.getValue();
+		if(config!=null&&StringUtil.isNotNull(config.getConfig_value())){
+			return config.getConfig_value();
 		}
 		return "";
 	}
@@ -62,8 +59,8 @@ public class ConfigUtil {
 	 */
 	public static int getIntVal(String key){
 		Config config = getConfig(key);
-		if(config!=null&&StringUtil.isNotNull(config.getValue())){
-			return Integer.valueOf(config.getValue());
+		if(config!=null&&StringUtil.isNotNull(config.getConfig_value())){
+			return Integer.valueOf(config.getConfig_value());
 		}
 		return 0;
 	}
@@ -116,8 +113,8 @@ public class ConfigUtil {
 	 */
 	public static boolean isConfigSwitchOn(String key){
 		Config config = getConfig(key);
-		if(config!=null&&StringUtil.isNotNull(config.getValue())){
-			isSwitchOn(config.getValue());
+		if(config!=null&&StringUtil.isNotNull(config.getConfig_value())){
+			isSwitchOn(config.getConfig_value());
 		}
 		return false;
 	}
@@ -163,5 +160,8 @@ public class ConfigUtil {
 			}
 		}
 		return givemetric;
+	}
+	private static ConfigService configService(){
+		return SpringContextHolder.getBean("configService");
 	}
 }

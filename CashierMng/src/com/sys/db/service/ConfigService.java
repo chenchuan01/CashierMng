@@ -1,8 +1,8 @@
 package com.sys.db.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.SpringContextHolder;
 import com.sys.base.BaseService;
 import com.sys.db.dao.ConfigDao;
 import com.sys.db.entity.Config;
@@ -14,10 +14,16 @@ import com.sys.db.entity.Config;
  */
 @Component
 public class ConfigService extends BaseService<Config> {
-	@Autowired
 	ConfigDao configDao;
 
 	public Config getConfig(String configKey){
-		return configDao.findKey(configKey);
+		return configDao().findKey(configKey);
+	}
+	
+	public ConfigDao configDao(){
+		if(configDao==null){
+			configDao = SpringContextHolder.getBean("configDao");
+		}
+		return configDao;
 	}
 }
