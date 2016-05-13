@@ -50,7 +50,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
-    <url-pattern>*.do</url-pattern>
+    <url-pattern>/*</url-pattern>
   </servlet-mapping>
   <context-param>
     <param-name>log4jConfigLocation</param-name>
@@ -62,12 +62,12 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  <!-- <jsp-config>
+  <jsp-config>
     <taglib>
-      <taglib-uri>http://busbooking.com/busbooking</taglib-uri>
-      <taglib-location>/WEB-INF/tlds/busbooking.tld</taglib-location>
+      <taglib-uri>http://sys.com/sys</taglib-uri>
+      <taglib-location>/WEB-INF/tlds/sys.tld</taglib-location>
     </taglib>
-  </jsp-config> -->
+  </jsp-config>
   <error-page>
     <error-code>404</error-code>
     <location>/WEB-INF/jsp/front/404.jsp</location>

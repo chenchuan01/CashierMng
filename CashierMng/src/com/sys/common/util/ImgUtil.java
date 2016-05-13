@@ -9,7 +9,6 @@ import java.util.List;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import sun.misc.BASE64Decoder;
 
 import com.sys.SysConstants;
 import com.sys.common.ConfigKeys;
@@ -137,8 +136,8 @@ public class ImgUtil {
 	 * @throws IOException 
 	 */
 	public static String saveCamera(String imageData, String dirs) throws IOException {
-		BASE64Decoder decoder = new BASE64Decoder();
-		byte[] bytes = decoder.decodeBuffer(imageData);
+		/*BASE64Decoder decoder = new BASE64Decoder();*/
+		byte[] bytes = new byte[1];
 		return commonSaveImg(null, bytes, dirs);
 	}
 }

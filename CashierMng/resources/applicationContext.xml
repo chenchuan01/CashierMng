@@ -16,100 +16,36 @@
 	<context:annotation-config />
 
 	<!-- 启动组件扫描，排除@Controller组件，该组件由SpringMVC配置文件扫描 -->
-	<context:component-scan base-package="com.busbooking">
+	<context:component-scan base-package="com">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    	<property name="locations">
+    		<list>
+        		<value>classpath:db.properties</value>
+        		<value>classpath:parameter.properties</value>
+    		</list>
+    	</property>
+    </bean>
 	<!-- dataSource for MySQL -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/busbooking" />
-		<property name="username" value="root" />
-		<property name="password" value="123" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.user}" />
+		<property name="password" value="${db.password}" />
 	</bean>
-	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
-		 <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-		 <property name="jdbcUrl" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=BYBUSBOOK" />
-		 <property name="user" value="sa" />
-		 <property name="password" value="123" />
-		 <property name="maxPoolSize" value="50" />
-		 <property name="minPoolSize" value="5" />
-		 <property name="initialPoolSize" value="10" />
-		 <property name="maxIdleTime" value="60" />
-		 <property name="acquireIncrement" value="2" />
-	</bean> -->
-	<!-- <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        驱动名称
-        <property name="DriverClassName" value="com.mysql.jdbc.Driver" />
-        JDBC连接串
-        <property name="url"
-            value="jdbc:mysql://localhost:3306/busbooking?useUnicode=true&amp;characterEncoding=UTF-8&autoReconnect=true" />
-        数据库用户名称
-        <property name="username" value="root" />
-        数据库密码
-        <property name="password" value="123" />
-        连接池最大使用连接数量
-        <property name="maxActive" value="20" />
-        初始化大小
-        <property name="initialSize" value="5" />
-        获取连接最大等待时间
-        <property name="maxWait" value="60000" />
-        连接池最小空闲
-        <property name="minIdle" value="2" />
-        逐出连接的检测时间间隔
-        <property name="timeBetweenEvictionRunsMillis" value="3000" />
-        最小逐出时间
-        <property name="minEvictableIdleTimeMillis" value="300000" />
-        测试有效用的SQL Query
-        <property name="validationQuery" value="SELECT 'x'" />
-        连接空闲时测试是否有效
-        <property name="testWhileIdle" value="true" />
-        获取连接时测试是否有效
-        <property name="testOnBorrow" value="false" />
-        归还连接时是否测试有效
-        <property name="testOnReturn" value="false" />
-    </bean> -->
-	
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> 
-		<property name="dataSource" ref="dataSource"/><!-- 定使用Spring定义的数据源 -->
-		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/><!-- 指定实现厂商专用特性 -->
-		<property name="packagesToScan" value="com.busbooking.entity"/><!--待扫描的实体类包，不再需要persistence.xml了-->
-		<property name="jpaDialect" ref="jpaDialect"/>
-		<property name="persistenceProvider" ref="persistenceProvider"/>
-		<property name="jpaProperties">
-			<props>
-				<!-- 命名规则 My_NAME->MyName -->
-				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
-				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
-	<!-- <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-		<property name="generateDdl" value="false" />  
-	   	<property name="database" value="SqlServer2008"/> 
-	   	<property name="showSql" value="true"/>
-	   	<property name="databasePlatform" value="org.hibernate.dialect.SQLServer2008Dialect" />
-	</bean> -->
-	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"></bean>
-	<bean id="persistenceProvider" class="org.hibernate.ejb.HibernatePersistence"></bean>
-	<!-- Spring Data Jpa配置 -->
- 	<jpa:repositories base-package="com.busbooking"  
- 	                  transaction-manager-ref="transactionManager" 
- 	                  entity-manager-factory-ref="entityManagerFactory"/>
-   
-	<!-- Jpa 事务配置 -->
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory"/>
-	</bean>
-
-	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
-
-	
+	<!-- jdbcTemplate -->
+     <bean id = "jdbcTemplate" class = "org.springframework.jdbc.core.JdbcTemplate">   
+         <property name = "dataSource" ref="dataSource"/>   
+    </bean> 
+    <bean id="params" class="com.sys.common.Params">
+    	<property name="sql_log" value="${sys.sql.log}"/>
+    	<property name="req_log" value="${sys.req.log}"/>
+    	<property name="sys_user_roles" value="${sys.user.roles}"/>
+    </bean>
+    <!-- file upload size -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 设置上传文件的最大尺寸为10MB -->
@@ -117,5 +53,5 @@
 			<value>10485760</value>
 		</property>
 	</bean>
-	<bean id="springHolder" class="com.busbooking.SpringContextHolder"/>
+	
 </beans>

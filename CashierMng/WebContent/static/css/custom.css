@@ -1,0 +1,42 @@
+/* custom css */
+/* valid */
+.validNoBorder{
+	border-color: #ff5454!important;
+}
+.validYesBorder{
+	border-color:#79c447!important;
+}
+.validMsg {
+	color: #ff5454;
+	word-wrap: break-word;
+	position: absolute;
+	display: block;
+}
+/* loading */
+#load{
+	width: 99.9%;
+	height: 99.9%;
+	margin: 0;
+	padding: 0;
+}
+#load_bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	z-index: 1001;
+	-moz-opacity: 0.6;
+	opacity: .60;
+	filter: alpha(opacity = 60);
+}
+#load_show {
+	position: absolute;
+	top: 45%;
+	left: 45%;
+	padding: 8px;
+	z-index: 1002;
+	overflow: auto;
+}
+/* end custom css */
