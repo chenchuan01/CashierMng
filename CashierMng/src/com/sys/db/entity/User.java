@@ -13,6 +13,10 @@ import com.sys.base.BaseEntity;
 @Table(name = "tb_user")  
 public class User extends BaseEntity{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String userName;
 	private String password;
 	private Integer roles = null;
@@ -54,4 +58,10 @@ public class User extends BaseEntity{
 	public void setRoles(Integer roles) {
 		this.roles = roles;
 	}
+	@Override
+	public String toString() {
+		return "User [userName=" + userName + ", password=" + password
+				+ ", roles=" + roles + "]";
+	}
+	
 }

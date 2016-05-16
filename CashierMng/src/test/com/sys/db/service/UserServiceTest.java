@@ -5,7 +5,6 @@ import javax.annotation.Resource;
 import org.junit.Test;
 
 import com.BaseTest;
-import com.sys.common.util.JsonUtil;
 import com.sys.common.util.LogUtil;
 import com.sys.db.entity.User;
 
@@ -23,12 +22,12 @@ public class UserServiceTest extends BaseTest{
 	public void registUser(){
 		User rslt = null;
 		try{
-			rslt=userService.userRegist(new User("test", "test1"));
+			rslt=userService.userRegist(new User("test2", "test2"));
 		}catch(Exception e){
 			LogUtil.error(getClass(), "jutil error", e);
 			
 		}
-		LogUtil.info(getClass(), JsonUtil.toJson(rslt));
+		LogUtil.info(getClass(), rslt.toString());
 	}
 	
 }
